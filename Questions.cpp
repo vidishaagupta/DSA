@@ -399,3 +399,85 @@ public:
         return ans;
     }
 };
+
+
+//Continuous Subarray Sum
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> mp;
+        mp[0] = -1;
+
+        int prefixSum = 0;
+
+        for (int i = 0; i < nums.size(); i++) {
+            prefixSum += nums[i];
+            int rem = prefixSum % k;
+
+            if (mp.count(rem)) {
+                if (i - mp[rem] >= 2)
+                    return true;
+            } else {
+                mp[rem] = i;
+            }
+        }
+
+        return false;
+        
+    }
+};
+
+
+//Group Anagrams
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> mp;
+
+        for (string s : strs) {
+            vector<int> freq(26, 0);
+
+            for (char c : s)
+                freq[c - 'a']++;
+
+            string key = "";
+
+            for (int x : freq)
+                key += to_string(x) + "#";
+
+            mp[key].push_back(s);
+        }
+
+        vector<vector<string>> ans;
+
+        for (auto it : mp)
+            ans.push_back(it.second);
+
+        return ans;
+    }
+};
+
+
+//Longest Substring Without Repeating Characters
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> mpp(256,-1);
+        int l=0;
+        int r=0;
+        int n=s.size();
+        int len=0;
+        while(r<n){
+            if(mpp[s[r]]!=-1){
+                l=max(mpp[s[r]]+1, l);
+            }
+            mpp[s[r]]=r;
+            len=max(len,r-l+1);
+            r++;
+            
+        }
+        return len;
+    }
+};
+
+
