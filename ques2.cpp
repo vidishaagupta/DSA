@@ -194,3 +194,138 @@ public:
         return c;
     }
 };
+
+
+//Length of Last Word
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int n = s.size();
+        int i = n - 1;
+        int count = 0;
+
+        while(i >= 0 && s[i] == ' ') {
+            i--;
+        }
+
+        while(i >= 0 && s[i] != ' ') {
+            count++;
+            i--;
+        }
+
+        return count;
+    }
+};
+
+//Make Array Zero by Subtracting Equal Amounts
+class Solution {
+public:
+    int minimumOperations(vector<int>& nums) {
+        unordered_set<int> st;
+
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] != 0){
+                st.insert(nums[i]);
+            }
+        }
+
+        return st.size();
+    }
+};
+
+
+//Contains Duplicate
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> st;
+
+        for(int i=0; i<nums.size(); i++){
+            if(st.find(nums[i]) != st.end()){
+                return true;
+            }
+            st.insert(nums[i]);
+        }
+
+        return false;
+    }
+};
+
+//Difference Between Element Sum and Digit Sum of an Array
+class Solution {
+public:
+    int differenceOfSum(vector<int>& nums) {
+        int elementSum = 0;
+        int digitSum = 0;
+
+        for(int num : nums){
+            elementSum += num;
+
+            while(num > 0){
+                digitSum += num % 10;
+                num /= 10;
+            }
+        }
+
+        return abs(elementSum - digitSum);
+    }
+};
+
+
+//Number of Good Pairs
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        unordered_map<int,int> mp;
+        int count = 0;
+
+        for(int num : nums){
+            count += mp[num];
+            mp[num]++;
+        }
+
+        return count;
+    }
+};
+
+
+//Majority Element
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n= nums.size();
+        int c=0;
+        int el;
+
+        for(int i=0;i<n;i++){
+            if(c==0){
+                c++;
+                el=nums[i];
+            }else if(nums[i]==el){
+                c++;
+            }else{
+                c--;
+            }
+        }
+        return el;
+    }
+};
+
+
+//Palindrome Number
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0 || (x%10==0 &&x!=0)){
+            return false;
+        }
+
+        int rev=0;
+        while(x>rev){
+            int d=x%10;
+            rev=rev*10+d;
+            x/=10;
+        }
+        return (x==rev || x==rev/10);
+
+    }
+}
