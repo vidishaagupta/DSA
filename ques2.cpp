@@ -386,3 +386,162 @@ public:
         return depth;
     }
 };
+
+
+
+//Convert the Temperature
+class Solution {
+public:
+    vector<double> convertTemperature(double celsius) {
+        vector<double> ans;
+        double k=celsius+273.15;
+        double f=celsius*1.80+32.00;
+        ans.push_back(k);
+        ans.push_back(f);
+        return ans;
+    }
+};
+
+
+//Smallest Even Multiple
+class Solution {
+public:
+    int smallestEvenMultiple(int n) {
+        if(n%2==0) return n;
+        return 2*n;
+    }
+};
+
+
+//Jewels and Stones
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+        unordered_set<char> st;
+
+        for(char ch : jewels){
+            st.insert(ch);
+        }
+
+        int count = 0;
+
+        for(char ch : stones){
+            if(st.find(ch) != st.end()){
+                count++;
+            }
+        }
+
+        return count;
+    }
+};
+
+
+//Unique Morse Code Words
+class Solution {
+public:
+    int uniqueMorseRepresentations(vector<string>& words) {
+        vector<string> morse = {
+            ".-","-...","-.-.","-..",".","..-.",
+            "--.","....","..",".---","-.-",".-..",
+            "--","-.","---",".--.","--.-",".-.",
+            "...","-","..-","...-",".--","-..-",
+            "-.--","--.."
+        };
+
+        unordered_set<string> st;
+
+        for(string word : words){
+            string code = "";
+
+            for(char ch : word){
+                code += morse[ch - 'a'];
+            }
+
+            st.insert(code);
+        }
+
+        return st.size();
+    }
+};
+
+
+//First Unique Character in a String
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        vector<int> freq(26,0);
+        for(char ch: s){
+            freq[ch-'a']++;
+        }
+
+        for(int i=0;i<s.size();i++){
+            if(freq[s[i]-'a']==1){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
+
+
+//Valid Anagram
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.length() != t.length()) return false;
+        int freq[26]={0};
+
+        for(int i=0;i<s.length();i++){
+            freq[s[i]-'a']++;
+        }
+        for(int i=0;i<t.length();i++){
+            freq[t[i]-'a']--;
+        }
+
+        for(int i=0;i<26;i++){
+            if(freq[i]!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+
+// Valid Palindrome
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int l=0;
+        int r=s.size()-1;
+        while(l<r){
+            while(l < r && !isalnum(s[l])){
+                l++;
+            }
+
+            while(l < r && !isalnum(s[r])){
+                r--;
+            }
+
+            if(tolower(s[l]) != tolower(s[r])){
+                return false;
+            }
+
+            l++;
+            r--;
+
+        }
+        return true;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+   
