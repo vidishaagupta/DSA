@@ -133,3 +133,50 @@ public:
         }
     }
 };
+
+//Swap nodes in pairs
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        ListNode* dummy=new ListNode(-1);
+        ListNode* prev=dummy;
+        dummy->next=head;
+
+        while(prev->next!=NULL && prev->next->next!=NULL){
+            ListNode* first=prev->next;
+            ListNode* sec=prev->next->next;
+
+            first->next=sec->next;
+            sec->next=first;
+            prev->next=sec;
+
+            prev=first;
+        }
+        return dummy->next;
+    }
+};
+
+//Remove Nth Node From End of List
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* fast=head;
+        ListNode* slow=head;
+        for(int i=0;i<n;i++){
+            fast=fast->next;
+        }
+        if(fast==NULL){
+            return head->next;
+        }
+        while(fast->next!=NULL){
+            fast=fast->next;
+            slow=slow->next;
+        }
+        ListNode* del=slow->next;
+        slow->next=slow->next->next;
+        delete del;
+        return head;
+    }
+};
+
+
