@@ -270,3 +270,69 @@ class Solution {
 
     }
 }
+
+//Evaluate Reverse Polish Notation
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> s;
+        for(string it:tokens){
+            if(it=="+" || it=="-" || it=="*" || it=="/"){
+                int a=s.top();
+                s.pop();
+
+                int b=s.top();
+                s.pop();
+
+                if(it=="+"){
+                    s.push(a+b);
+                }
+                if(it=="-"){
+                    s.push(b-a);
+                }
+                if(it=="*"){
+                    s.push(a*b);
+                }
+                if(it=="/"){
+                    s.push(b/a);
+                }
+            }else{
+                s.push(stoi(it));
+            }
+        }
+        return s.top();
+    }
+};
+
+//Min Stack
+class MinStack {
+public:
+    stack<long long> st;
+    stack<long long> mn;
+
+    MinStack() {
+        
+    }
+    
+    void push(long long value) {
+        st.push(value);
+        if(mn.empty()){
+            mn.push(value);
+        }else{
+            mn.push(min(value,mn.top()));
+        }
+    }
+    
+    void pop() {
+        st.pop();
+        mn.pop();
+    }
+    
+    int top() {
+        return st.top();
+    }
+    
+    int getMin() {
+        return mn.top();
+    }
+};
