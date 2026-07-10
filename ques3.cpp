@@ -230,5 +230,43 @@ public:
     }
 };
 
-//Reverse a linked list(iterative)
+//Spiral matrix
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
 
+        List<Integer> ans=new ArrayList<>();
+
+        int top=0, left=0;
+        int right=m-1, bott=n-1;
+
+        while(top<=bott && left<=right){
+            for(int i=left;i<=right;i++){
+                ans.add(matrix[top][i]);
+            }
+            top++;
+
+            for(int i=top;i<=bott;i++){
+                ans.add(matrix[i][right]);
+            }
+            right--;
+
+            if(top<=bott){
+                for(int i=right;i>=left;i--){
+                    ans.add(matrix[bott][i]);
+                }
+                bott--;
+            }
+
+            if(left<=right){
+                for(int i=bott;i>=top;i--){
+                    ans.add(matrix[i][left]);
+                }
+                left++;
+            }
+        }
+        return ans;
+
+    }
+}
