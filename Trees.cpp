@@ -62,3 +62,47 @@ public:
 };
 
 //Maximum Depth of Binary Tree
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if(root==NULL) return 0;
+        int l=maxDepth(root->left);
+        int r=maxDepth(root->right);
+
+        return 1+max(l,r);
+    }
+};
+
+//Balanced Binary Tree
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        return depth(root)!=-1;
+    }
+
+    int depth(TreeNode* root){
+        if(root==NULL){
+            return 0;
+        }
+        int l=depth(root->left);
+        if(l==-1) return -1;
+
+        int r=depth(root->right);
+        if(r==-1) return -1;
+
+        if(abs(l-r)>1) return -1;
+
+        return 1+max(l,r);
+    }
+};
+
+//Search in a Binary Search Tree
+class Solution {
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        while(root!=NULL && root->val!=val){
+            root=val<root->val?root->left:root->right;
+        }
+        return root;
+    }
+};
