@@ -1,0 +1,7 @@
+OpenMRS
+Frappe
+Open Food Facts
+Oppia
+caMicroscope
+Zulip
+Wagtail
