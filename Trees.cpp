@@ -251,3 +251,105 @@ public:
     }
 };
 
+// Binary Tree Preorder Traversal
+class Solution {
+public:
+    void preorder(TreeNode* root,vector<int> & ans){
+        if(root==NULL){
+            return;
+        }
+        ans.push_back(root->val);
+        preorder(root->left,ans);
+        preorder(root->right,ans);
+        
+    }
+
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        preorder(root,ans);
+        return ans;
+    }
+};
+
+//Binary Tree Postorder Traversal
+class Solution {
+public:
+    void postorder(TreeNode* root,vector<int>& arr){
+        if(root==NULL){
+            return;
+        }
+        postorder(root->left,arr);
+        postorder(root->right,arr);
+        arr.push_back(root->val);
+    }
+
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        postorder(root,ans);
+        return ans;
+    }
+};
+
+//Lowest Common Ancestor of a Binary Tree
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root==NULL || root==p || root==q){
+            return root;
+        }
+
+        TreeNode* l=lowestCommonAncestor(root->left,p,q);
+        TreeNode* r=lowestCommonAncestor(root->right,p,q);
+
+        if(l==NULL){
+            return r;
+        }else if(r==NULL){
+            return l;
+        }else{
+            return root;
+        }
+    }
+};
+
+//Sum of Left Leaves
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        if (root==NULL) return 0;
+        int s=0;
+
+        if(root->left!=NULL){
+            if(root->left->left==NULL && root->left->right==NULL){
+                s+=root->left->val;
+            }
+        }
+
+        s+=sumOfLeftLeaves(root->left);
+        s+=sumOfLeftLeaves(root->right);
+
+        return s;
+    }
+};
+
+//Minimum Distance Between BST Nodes
+class Solution {
+public:
+    int prev=-1;
+    int ans=INT_MAX;
+    void inorder(TreeNode* root){
+        if(root==NULL){
+            return ;
+        }
+        inorder(root->left);
+        if(prev!=-1){
+            ans=min(ans,root->val-prev);
+        }
+        prev=root->val;
+        inorder(root->right);
+    }
+
+    int minDiffInBST(TreeNode* root) {
+        inorder(root);
+        return ans;
+    }
+};
